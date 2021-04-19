@@ -15,14 +15,21 @@ export default function NutritionOverview({data, requiredProtein = 170}) {
 
     return (
         <View style={styles.container}>
-            <Text>Protein income: {totalGrams}{requiredProtein && `/${requiredProtein}`}g</Text>
-            {data.map(n => <NutritionDetails data={n}/>)}
+            <Text style={styles.incomeText}>Protein income: {totalGrams}{requiredProtein && `/${requiredProtein}`}g</Text>
+            {data.map(n => <NutritionDetails key={n.title} data={n}/>)}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-
+        width: "100%",
+        marginVertical: 10,
+        alignItems: "center"
     },
+    incomeText: {
+        fontWeight: "600",
+        fontSize: 20,
+        marginBottom: 10
+    }
 });

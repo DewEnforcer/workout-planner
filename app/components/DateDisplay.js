@@ -13,13 +13,19 @@ export default function DateDisplay({tmstp = null}) {
 
     return (
         <View style={styles.container}>
-            <Text>{dateStr}</Text>
+            <Text style={styles.text}>{dateStr}</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-
+        marginVertical: 5,
+        width: "100%"
     },
+    text: {
+        fontSize: 30,
+        textAlign: "center",
+        fontWeight: "600"
+    }
 });

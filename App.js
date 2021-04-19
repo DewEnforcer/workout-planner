@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import {NavigationContainer} from "@react-navigation/native";
 import { StyleSheet, Text, View } from 'react-native';
-import DayOverview from './app/components/DayOverview';
+import DayOverview from './app/screens/DayOverviewScreen';
 import Screen from './app/components/Screen';
+import HomeScreen from './app/screens/HomeScreen';
+import HomeScreenNavigatorStack from "./app/components/navigators/HomeScreenStackNavigator";
 
 export default function App() {
   return (
-    <Screen>
-      <DayOverview data={[]}/>
-    </Screen>
+    	<NavigationContainer>
+        <HomeScreenNavigatorStack/>
+      </NavigationContainer>
   );
 }
 

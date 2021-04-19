@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import DateDisplay from './DateDisplay'
-import NutritionOverview from './nutrition/NutritionOverview'
-import WorkoutPreview from './workout/WorkoutPreview'
+import { View, StyleSheet } from 'react-native'
+import DateDisplay from '../components/DateDisplay'
+import NutritionOverview from '../components/nutrition/NutritionOverview'
+import WorkoutPreview from '../components/workout/WorkoutPreview'
 
 export default class DayOverview extends Component {
     state = {
@@ -21,7 +21,7 @@ export default class DayOverview extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <DateDisplay/>
                 <WorkoutPreview title={this.state.workout.title}/>
                 <NutritionOverview data={this.state.nutrition}/>
@@ -29,3 +29,11 @@ export default class DayOverview extends Component {
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center"
+    },
+});
