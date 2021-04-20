@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import DateDisplay from '../components/DateDisplay'
 import NutritionOverview from '../components/nutrition/NutritionOverview'
+import Screen from '../components/Screen'
 import WorkoutPreview from '../components/workout/WorkoutPreview'
 
 export default class DayOverview extends Component {
@@ -21,11 +22,13 @@ export default class DayOverview extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <DateDisplay/>
-                <WorkoutPreview title={this.state.workout.title}/>
-                <NutritionOverview data={this.state.nutrition}/>
-            </View>
+            <Screen>
+                <View style={styles.container}>
+                    <DateDisplay/>
+                    <WorkoutPreview title={this.state.workout.title}/>
+                    <NutritionOverview data={this.state.nutrition}/>
+                </View>
+            </Screen>
         )
     }
 }
