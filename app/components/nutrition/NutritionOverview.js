@@ -15,7 +15,7 @@ export default function NutritionOverview({data, requiredProtein = 170}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.incomeText}>Protein income: {totalGrams}{requiredProtein && `/${requiredProtein}`}g</Text>
+            <Text style={[styles.incomeText, totalGrams < requiredProtein ? styles.insufficientProtein : styles.sufficientProtein]}>Protein income: {totalGrams}{requiredProtein && `/${requiredProtein}`}g</Text>
             {data.map(n => <NutritionDetails key={n.title} data={n}/>)}
         </View>
     );
@@ -31,5 +31,11 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         fontSize: 20,
         marginBottom: 10
-    }
+    },
+    insufficientProtein: {
+        color: "red"
+    },
+    sufficientProtein: {
+        color: "green"
+    },
 });
