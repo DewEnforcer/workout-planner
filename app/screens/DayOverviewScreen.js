@@ -8,7 +8,8 @@ import WorkoutPreview from '../components/workout/WorkoutPreview'
 export default class DayOverview extends Component {
     state = {
         workout: {
-            title: "Arms day (Extreme)"
+            title: "Arms day (Extreme)",
+            typeId: 2
         },
         nutrition: [
             {timeStr: "8:00", title: "Ovesná kaše s banánem", grams: 13},
@@ -26,7 +27,7 @@ export default class DayOverview extends Component {
                 <View style={styles.container}>
                     <DateDisplay/>
                     <WorkoutPreview title={this.state.workout.title}/>
-                    <NutritionOverview data={this.state.nutrition}/>
+                    <NutritionOverview workoutType={this.state.workout.typeId} data={this.state.nutrition}/>
                 </View>
             </Screen>
         )

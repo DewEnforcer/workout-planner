@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { getSettings } from '../services/settingsService';
 import NutritionDetails from './NutritionDetails';
 
 
-export default function NutritionOverview({data, requiredProtein = 170}) {
+export default function NutritionOverview({data, workoutType}) {
     const [totalGrams, setTotalGrams] = useState();
+    const [requiredProtein, setRequiredProtein] = useState(null)
 
-    useEffect(() => {
+    const handleProteinSetter = async () => {
         let gramsTotal = data.reduce((total, currentVal) => {
             return total + currentVal.grams;
         }, 0)
+        const settings = await getSettings();
+        const {protMultiplier, weight} = settings;
+        setRequiredProtein(Math.round(weight * protMultiplier[workoutType].value))
         setTotalGrams(gramsTotal);
+    }
+
+    useEffect(() => {
+        handleProteinSetter();
     }, [])
 
     return (

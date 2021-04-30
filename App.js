@@ -6,6 +6,7 @@ import DayOverview from './app/screens/DayOverviewScreen';
 import Screen from './app/components/Screen';
 import HomeScreen from './app/screens/HomeScreen';
 import HomeScreenNavigatorStack from "./app/components/navigators/HomeScreenStackNavigator";
+import WeekSettingsScreen from './app/screens/WeekSettingsScreen';
 
 export default function App() {
   return (

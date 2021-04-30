@@ -6,7 +6,7 @@ export function timeConverter(UNIX_timestamp){
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var month = months[a.getMonth()];
     var date = a.getDate();
-    var day = days[a.getDay()];
+    var day = days[a.getDay()-1];
     var time = day + " " + formatNum(date) + ' ' + month;
     return time;
 }

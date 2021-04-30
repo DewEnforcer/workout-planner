@@ -1,18 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Modal } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Screen from '../components/Screen';
+import DaySetter from '../components/week/DaySetter';
 
 export default function CalendarScreen() {
-
-const handleShowDayDetails = d => {
     
-}
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedDay, setSelectedDay] = useState();
 
-return (
+    const handleSetDay = day => {
+        setModalVisible(true);
+        setSelectedDay(day);
+    }
+
+    const handleSaveDayData = data => {
+        console.log(data);
+        setModalVisible(false);
+    }
+
+    return (
     <Screen>
         <Calendar
-             onDayPress={(day) => {console.log('selected day', day)}}
+             onDayPress={handleSetDay}
              // Handler which gets executed on day long press. Default = undefined
              onDayLongPress={(day) => {console.log('selected day', day)}}
              // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
@@ -49,6 +59,9 @@ return (
              // Enable the option to swipe between months. Default = false
              enableSwipeMonths={true}
         />
+        <Modal visible={modalVisible} animationType="slide" onRequestClose={() => setModalVisible(false)}>
+            <DaySetter day={selectedDay} onSubmit={handleSaveDayData}/>
+        </Modal> 
     </Screen>
 );
 }
