@@ -10,8 +10,8 @@ export default function HomeScreen({navigation}) {
             <View style={styles.container}>
                 <NavButton style={styles.navBtns} onPress={() => navigation.navigate(routes.DAY_OVERVIEW)} title="Todays overview"/>
                 <NavButton style={styles.navBtns} onPress={() => navigation.navigate(routes.CALENDAR)} title="Calendar"/>
-                <NavButton style={styles.navBtns} title="Add nutritions"/>
-                <NavButton style={styles.navBtns} title="Add workout"/>
+                <NavButton style={styles.navBtns} onPress={() => navigation.navigate(routes.ADD_NUTRITION_PLAN)} title="Add nutritions"/>
+                <NavButton style={styles.navBtns} onPress={() => navigation.navigate(routes.ADD_WORKOUT)} title="Add workout"/>
             </View>
         </Screen>
     );

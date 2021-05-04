@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { timeConverter } from '../../utils/dateUtils';
 import AppForm from '../forms/Form';
@@ -7,18 +7,41 @@ import PickerItem from '../PickerItem';
 import TemplatePicker from "../TemplatePicker";
 import defaultStyles from "../../config/styles";
 import SubmitButton from '../forms/SubmitButton';
+import NewWorkout from '../workout/NewWorkout';
+import NewNutrition from '../nutrition/NewNutrition';
+import { addNutrition, getAllNutritions } from '../services/nutritionsService';
+import { useState } from 'react/cjs/react.development';
+import { addWorkout, getWorkouts } from '../services/workoutService';
 
-const workouts = [
-    {value: 1, label: "Extreme workout"},
-    {value: 2, label: "Standard workout"},
-]
-const nutritions = [
-    {value: 1, label: "Eggs day"},
-    {value: 2, label: "Raw meat day"},
-]
 
 export default function DaySetter({day, onSubmit}) {
-    console.log(day);
+
+    const [workouts, setWorkouts] = useState([]);
+    const [nutritions, setNutritions] = useState([]);
+
+    const handleNewNutrition = async data => {
+        const newNutritions = await addNutrition(data);
+        setNutritions(newNutritions);
+    }
+
+    const handleNewWorkout = async data => {
+        const newWorkouts = await addWorkout(data);
+        setWorkouts(newWorkouts);
+    }
+
+    const getWorkoutsData = async () => {
+        const workoutsData = await getWorkouts();
+        if (workoutsData) setWorkouts(workoutsData);
+    }
+    const getNutrition = async () => {
+        const nutrData = await getAllNutritions();
+        if (nutrData) setNutritions(nutrData);
+    }
+
+    useEffect(() => {
+        getWorkoutsData();
+        getNutrition();
+    }, [])
 
     return (
         <View>
@@ -32,8 +55,8 @@ export default function DaySetter({day, onSubmit}) {
                 }
                 onSubmit={onSubmit}
             >
-                <TemplatePicker placeholder="Select your workout.." data={workouts} numberOfColumns={1} name="workout_tmp"/>
-                <TemplatePicker placeholder="Select your nutritions.." data={nutritions} numberOfColumns={1} name="nutrition_tmp"/>
+                <TemplatePicker placeholder="Select your workout.." data={workouts} ModalChild={NewWorkout} modalChildOnSubmit={handleNewWorkout} numberOfColumns={1} name="workout_tmp"/>
+                <TemplatePicker placeholder="Select your nutritions.." data={nutritions} ModalChild={NewNutrition} modalChildOnSubmit={handleNewNutrition} numberOfColumns={1} name="nutrition_tmp"/>
                 <SubmitButton title="Save"/>
             </AppForm>
         </View>

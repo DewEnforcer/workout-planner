@@ -7,8 +7,16 @@ import Screen from './app/components/Screen';
 import HomeScreen from './app/screens/HomeScreen';
 import HomeScreenNavigatorStack from "./app/components/navigators/HomeScreenStackNavigator";
 import WeekSettingsScreen from './app/screens/WeekSettingsScreen';
+import AppTimePicker from './app/components/forms/TimePicker';
 
 export default function App() {
+  const handleTimeChange = ({minutes: newMinutes, seconds: newSeconds}) => {
+    console.log(newMinutes, newSeconds);
+
+    this.setState(newState);
+  }
+
+
   return (
     	<NavigationContainer>
         <HomeScreenNavigatorStack/>

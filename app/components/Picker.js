@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
+import ListEmptyComponent from "./lists/ListEmptyComponent";
 
 function AppPicker({
   icon,
@@ -52,8 +53,14 @@ function AppPicker({
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
-            keyExtractor={(item) => item.value.toString()}
+            keyExtractor={(item) => {
+              if (item.value) return item.value.toString();
+              if (item.id) return item.id.toString();
+
+              console.log(item);
+            }}
             numColumns={numberOfColumns}
+            ListEmptyComponent={ListEmptyComponent}
             renderItem={({ item }) => (
               <PickerItemComponent
                 item={item}

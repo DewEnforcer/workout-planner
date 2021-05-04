@@ -14,7 +14,7 @@ export default function CalendarScreen() {
         setSelectedDay(day);
     }
 
-    const handleSaveDayData = data => {
+    const handleSaveDayData = data => { //TODO
         console.log(data);
         setModalVisible(false);
     }

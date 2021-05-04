@@ -3,6 +3,7 @@ import { useFormikContext } from "formik";
 
 import Picker from "./Picker";
 import ErrorMessage from "./forms/ErrorMessage";
+import { Modal } from "react-native";
 
 function TemplatePicker({
   data,
@@ -11,16 +12,23 @@ function TemplatePicker({
   PickerItemComponent,
   placeholder,
   width,
+  ModalChild = null,
+  modalChildOnSubmit
 }) {
   const { errors, setFieldValue, touched, values } = useFormikContext();
+  const [modalVisible, setModalVisible] = useState(false);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    setItems([{value: 0, label: "+Add"}, ...data])
-  }, [])
+    const newItems = [{value: 0, label: "+Add"}, ...data]; 
+    setItems(newItems);
+    console.log(newItems);
+  }, [data])
 
   const handleOnSelectItem = item => {
-    if (item.value === 0) return console.log("Add item");
+    if (item.value === 0) { //pressed add
+      if (ModalChild) return setModalVisible(true);
+    }
     setFieldValue(name, item);
   }
 
@@ -36,6 +44,12 @@ function TemplatePicker({
         width={width}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
+      <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+        <ModalChild onSubmit={data => {
+          modalChildOnSubmit(data);
+          setModalVisible(false);
+        }}/>
+      </Modal>
     </>
   );
 }
