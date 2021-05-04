@@ -8,6 +8,8 @@ import ItemInputList from '../forms/ItemInputList';
 import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
 import routes from '../navigators/routes';
+import TemplatePicker from '../TemplatePicker';
+import NewWorkoutType from './NewWorkoutType';
 
 export default function NewWorkout({onSubmit}) {
 
@@ -21,6 +23,7 @@ export default function NewWorkout({onSubmit}) {
             {id: 3, label: "Dumbbell Alternate Hammer Curl"},
         ]
     )
+    const [workoutTypes, setWorkoutTypes] = useState([]);
 
     useEffect(() => {
         setExcercises([{id: 0, label: "+Add new"}, ...excercises]);
@@ -43,6 +46,10 @@ export default function NewWorkout({onSubmit}) {
         if (item.id === 0) return navigate(routes.ADD_NEW_EXCERCISE);
     }
 
+    const handleNewWorkoutType = data => {
+        console.log(data);
+    }
+
     return (
         <>
         <AppForm
@@ -56,8 +63,8 @@ export default function NewWorkout({onSubmit}) {
             onSubmit={handleSubmit}
         >
             <AppFormField name="label" placeholder="Enter the workout title.."/>
-            <AppFormPicker name="workout_typeId" items={[]} placeholder="Select workout difficulty..."/>
-            <ItemInputList name="excercises" onRemoveItem={handleRemoveExcercise} onSelectItem={(name) => {setModalVisible(true); console.log(name);}}/>
+            <TemplatePicker name="workout_typeId" data={workoutTypes} ModalChild={NewWorkoutType} modalChildOnSubmit={handleNewWorkoutType} placeholder="Select workout diffuclty"/>
+            <ItemInputList name="excercises" onRemoveItem={handleRemoveExcercise} onSelectItem={(name) => setModalVisible(true)}/>
             <SubmitButton title="Save"/>
             <Modal visible={modalVisible} animationType="slide" onRequestClose={() => setModalVisible(false)}>    
                 <SimpleFormPicker

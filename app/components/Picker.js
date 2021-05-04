@@ -56,8 +56,6 @@ function AppPicker({
             keyExtractor={(item) => {
               if (item.value) return item.value.toString();
               if (item.id) return item.id.toString();
-
-              console.log(item);
             }}
             numColumns={numberOfColumns}
             ListEmptyComponent={ListEmptyComponent}

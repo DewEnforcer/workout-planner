@@ -20,10 +20,12 @@ function TemplatePicker({
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const newItems = [{value: 0, label: "+Add"}, ...data]; 
-    setItems(newItems);
-    console.log(newItems);
-  }, [data])
+    if (items.length === 0 || items[0].value !== 0) { //prevent duplication
+      const newItems = [{value: 0, label: "+Add"}, ...data]; 
+      setItems(newItems);
+    }
+    console.log(items);
+  }, [])
 
   const handleOnSelectItem = item => {
     if (item.value === 0) { //pressed add
