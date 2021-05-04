@@ -11,7 +11,7 @@ export default function ItemInputList({name, onSelectItem, onRemoveItem}) {
 
     return (
         <>
-            <ItemInput icon="plus" onPress={onSelectItem}/>
+            <ItemInput icon="plus" onPress={() => onSelectItem(name)}/>
             {values[name].map(i => <ItemInput key={i.id.toString()} onDelete={onRemoveItem} id={i.id} label={i.label}/>)}
         </>
     );

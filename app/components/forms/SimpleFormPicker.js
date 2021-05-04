@@ -9,12 +9,11 @@ export default function SimpleFormPicker({name, items, numColumns=1,onItemSelect
     const { values, setValues } = useFormikContext();
 
     const handleItemSelect = (item) => {
+        if (item.id === 0) return onItemSelect(item); //would otherwise select add new placeholders
         setValues({
             ...values,
             [name]: [...values[name], item]
         })
-        console.log(item, values[name]);
-        //setFieldValue(name, item)
         onItemSelect(item);
     }
 
