@@ -8,6 +8,7 @@ import HomeScreen from './app/screens/HomeScreen';
 import HomeScreenNavigatorStack from "./app/components/navigators/HomeScreenStackNavigator";
 import WeekSettingsScreen from './app/screens/WeekSettingsScreen';
 import AppTimePicker from './app/components/forms/TimePicker';
+import AppBottomNavigator from './app/components/navigators/AppBottomNavigator';
 
 export default function App() {
   const handleTimeChange = ({minutes: newMinutes, seconds: newSeconds}) => {
@@ -19,7 +20,7 @@ export default function App() {
 
   return (
     	<NavigationContainer>
-        <HomeScreenNavigatorStack/>
+        <AppBottomNavigator/>
       </NavigationContainer>
   );
 }

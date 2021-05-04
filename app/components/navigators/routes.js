@@ -5,6 +5,7 @@ const routes = {
     ADD_WORKOUT: "add_workouts",
     ADD_NUTRITION_PLAN: "add_nutriplan",
     ADD_NEW_NUTRITION: "add_new_nutr",
-    ADD_NEW_EXCERCISE: "add_new_exc"
+    ADD_NEW_EXCERCISE: "add_new_exc",
+    SETTINGS: "settings"
 }
 export default routes;
