@@ -8,6 +8,7 @@ import ItemInputList from '../forms/ItemInputList';
 import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
 import routes from '../navigators/routes';
+import { getExcercises } from '../services/excerciseService';
 import TemplatePicker from '../TemplatePicker';
 import NewWorkoutType from './NewWorkoutType';
 
@@ -16,17 +17,17 @@ export default function NewWorkout({onSubmit}) {
     const {navigate} = useNavigation();
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [excercises, setExcercises] = useState(
-        [
-            {id: 1, label: "Barbell Bent Over Row"},
-            {id: 2, label: "Pullups"},
-            {id: 3, label: "Dumbbell Alternate Hammer Curl"},
-        ]
-    )
+    const [excercises, setExcercises] = useState([]);
     const [workoutTypes, setWorkoutTypes] = useState([]);
 
+    const handleGetExcData = async () => {
+        let data = await getExcercises();
+        if (!data) data = [];
+        setExcercises([{id: 0, label: "+Add new"}, ...data]);
+    }
+
     useEffect(() => {
-        setExcercises([{id: 0, label: "+Add new"}, ...excercises]);
+        handleGetExcData();
     }, [])
 
     const handleSubmit = (data, {resetForm}) => {
@@ -43,7 +44,7 @@ export default function NewWorkout({onSubmit}) {
 
     const handleItemSelect = (item) => {
         setModalVisible(false);
-        if (item.id === 0) return navigate(routes.ADD_NEW_EXCERCISE);
+        if (item.id === 0) return navigate(routes.ADD_NEW_EXCERCISE, {onReturn: handleGetExcData});
     }
 
     const handleNewWorkoutType = data => {

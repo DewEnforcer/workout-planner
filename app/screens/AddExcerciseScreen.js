@@ -4,9 +4,10 @@ import Screen from '../components/Screen';
 import { addExcercise } from '../components/services/excerciseService';
 import NewExcercise from '../components/workout/NewExcercise';
 
-export default function AddExcerciseScreen({navigation}) {
-    const handleNewExc = (data) => {
-        addExcercise(data);
+export default function AddExcerciseScreen({navigation, route}) {
+    const handleNewExc = async (data) => {
+        await addExcercise(data);
+        await route.params.onReturn();
         navigation.goBack();
     }
 
