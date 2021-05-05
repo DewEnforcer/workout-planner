@@ -51,25 +51,8 @@ function AppPicker({
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
-          <FlatList
-            data={items}
-            keyExtractor={(item) => {
-              if (item.value) return item.value.toString();
-              if (item.id) return item.id.toString();
-            }}
-            numColumns={numberOfColumns}
-            ListEmptyComponent={ListEmptyComponent}
-            renderItem={({ item }) => (
-              <PickerItemComponent
-                item={item}
-                label={item.label}
-                onPress={() => {
-                  setModalVisible(false);
-                  onSelectItem(item);
-                }}
-              />
-            )}
-          />
+          {items.map(item => <PickerItemComponent key={item.id} item={item} label={item.label} onPress={() => {setModalVisible(false); onSelectItem(item)}}/>)}
+          {items.length === 0 && <ListEmptyComponent/>}
         </Screen>
       </Modal>
     </>

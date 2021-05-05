@@ -17,18 +17,9 @@ function TemplatePicker({
 }) {
   const { errors, setFieldValue, touched, values } = useFormikContext();
   const [modalVisible, setModalVisible] = useState(false);
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    if (items.length === 0 || items[0].value !== 0) { //prevent duplication
-      const newItems = [{value: 0, label: "+Add"}, ...data]; 
-      setItems(newItems);
-    }
-    console.log(items);
-  }, [])
 
   const handleOnSelectItem = item => {
-    if (item.value === 0) { //pressed add
+    if (item.id === 0) { //pressed add
       if (ModalChild) return setModalVisible(true);
     }
     setFieldValue(name, item);
@@ -37,7 +28,7 @@ function TemplatePicker({
   return (
     <>
       <Picker
-        items={items}
+        items={data}
         numberOfColumns={numberOfColumns}
         onSelectItem={handleOnSelectItem}
         PickerItemComponent={PickerItemComponent}

@@ -7,8 +7,8 @@ import defaultStyles from "../config/styles";
 
 export default function AddWorkoutScreen() {
 
-    const handleNewWorkout = data => {
-        addWorkout(data);
+    const handleNewWorkout = async data => {
+        await addWorkout(data);
     }
 
     return (

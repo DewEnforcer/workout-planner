@@ -9,6 +9,7 @@ import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
 import routes from '../navigators/routes';
 import { getExcercises } from '../services/excerciseService';
+import { addWorkoutType, getWorkoutTypes, saveWorkoutType } from '../services/workoutTypeService';
 import TemplatePicker from '../TemplatePicker';
 import NewWorkoutType from './NewWorkoutType';
 
@@ -26,8 +27,14 @@ export default function NewWorkout({onSubmit}) {
         setExcercises([{id: 0, label: "+Add new"}, ...data]);
     }
 
+    const handleGetWorkoutTypes = async () => {
+        const data = await getWorkoutTypes();
+        setWorkoutTypes([{id: 0, label: "+Add new"}, ...data]);
+    }
+
     useEffect(() => {
         handleGetExcData();
+        handleGetWorkoutTypes();
     }, [])
 
     const handleSubmit = (data, {resetForm}) => {
@@ -47,8 +54,9 @@ export default function NewWorkout({onSubmit}) {
         if (item.id === 0) return navigate(routes.ADD_NEW_EXCERCISE, {onReturn: handleGetExcData});
     }
 
-    const handleNewWorkoutType = data => {
-        console.log(data);
+    const handleNewWorkoutType = async data => {
+        await addWorkoutType(data);
+        await handleGetWorkoutTypes();
     }
 
     return (
