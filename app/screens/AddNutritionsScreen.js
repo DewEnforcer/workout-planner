@@ -10,7 +10,7 @@ import defaultStyles from "../config/styles";
 export default function AddNutritionsScreen() {
 
     const handleNutritionAdd = data => {
-        addNutrition(data);
+        //addNutrition(data);
     }
 
     return (

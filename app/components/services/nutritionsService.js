@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import {storeData, getData} from "./storeService";
-import { v4 as uuidv4 } from 'uuid';
+import shortid from "shortid"
 
 const KEY = "NUTRITIONS"
 
@@ -8,7 +8,7 @@ export const addNutrition = async (data) => {
     let allNutritions = await getAllNutritions();
     if (!allNutritions) allNutritions = []
 
-    allNutritions.push({...data, id: uuidv4()})
+    allNutritions.push({...data, id: shortid.generate()})
     await saveNutritions(allNutritions);
 
     return allNutritions;

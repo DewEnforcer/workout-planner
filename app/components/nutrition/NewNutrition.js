@@ -11,7 +11,6 @@ export default function NewNutrition({onSubmit}) {
             initialValues={
                 {
                     label: "",
-                    time_str: "",
                     grams: null
                 }
             }
@@ -22,7 +21,6 @@ export default function NewNutrition({onSubmit}) {
         >
             <AppFormField name="label" placeholder="Enter the nutrition name.."/>
             <AppFormField name="grams" placeholder="Protein in grams..."/>
-            <AppTimePicker name="time_str"/>
             <SubmitButton title="Save"/>
         </AppForm>
     );

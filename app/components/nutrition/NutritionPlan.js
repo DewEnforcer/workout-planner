@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, StyleSheet, Text, View } from 'react-native';
+import { DeviceEventEmitter, Modal, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AppForm from '../forms/Form';
 import AppFormField from '../forms/FormField';
@@ -8,21 +8,24 @@ import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
 import AppTimePicker from '../forms/TimePicker';
 import routes from '../navigators/routes';
+import { getAllNutritions } from '../services/nutritionsService';
 
 export default function NutritionPlan({onSubmit}) {
 
     const {navigate} = useNavigation();
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [nutritions, setNutritions] = useState([
-        {id: 1, label: "Protein shake"},
-        {id: 2, label: "Tvaroho"},
-        {id: 3, label: "Proteino bar"},
-    ]);
+    const [nutritions, setNutritions] = useState([]);
 
     useEffect(() => {
-        setNutritions([{id: 0, label: "+Add new"}, ...nutritions])
+        getNutritionsData();
     }, [])
+    
+    const getNutritionsData = async () => {
+        const data = await getAllNutritions();
+        setNutritions([{id: 0, label: "+Add new"}, ...data])
+    }
+
 
     const handleSubmit = (data, {resetForm}) => {
         onSubmit(data);
@@ -38,7 +41,7 @@ export default function NutritionPlan({onSubmit}) {
 
     const handleItemSelect = (item) => {
         setModalVisible(false);
-        if (item.id === 0) return navigate(routes.ADD_NEW_NUTRITION);
+        if (item.id === 0) return navigate(routes.ADD_NEW_NUTRITION, {onReturn: getNutritionsData});
     }
 
     return (
