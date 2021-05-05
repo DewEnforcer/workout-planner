@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import defaultStyles from "../../config/styles";
 
-export default function ItemInput({icon, label, id, onPress, onDelete}) {
+export default function ItemInput({icon, label, grams, id, onPress, onDelete}) {
     const {values, setValues} = useFormikContext();
 
     const handleOnPress = () => {
@@ -19,7 +19,7 @@ export default function ItemInput({icon, label, id, onPress, onDelete}) {
                     size={25}
                     name={icon}
                 />}
-                <Text>{label}</Text>
+                <Text>{label} {grams && <Text>| {grams}g</Text>}</Text>
             </View>
         </TouchableOpacity>
     );
