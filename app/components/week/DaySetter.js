@@ -12,6 +12,7 @@ import NewNutrition from '../nutrition/NewNutrition';
 import { addNutrition, getAllNutritions } from '../services/nutritionsService';
 import { useState } from 'react/cjs/react.development';
 import { addWorkout, getWorkouts } from '../services/workoutService';
+import { getAllNutritionPlans } from '../services/nutritionPlanService';
 
 
 export default function DaySetter({day, onSubmit}) {
@@ -34,7 +35,7 @@ export default function DaySetter({day, onSubmit}) {
         if (workoutsData) setWorkouts(workoutsData);
     }
     const getNutrition = async () => {
-        const nutrData = await getAllNutritions();
+        const nutrData = await getAllNutritionPlans();
         if (nutrData) setNutritions(nutrData);
     }
 

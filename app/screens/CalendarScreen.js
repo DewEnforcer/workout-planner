@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Modal } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Screen from '../components/Screen';
+import { saveDayPlan } from '../components/services/dayService';
 import DaySetter from '../components/week/DaySetter';
 
 export default function CalendarScreen() {
@@ -14,8 +15,8 @@ export default function CalendarScreen() {
         setSelectedDay(day);
     }
 
-    const handleSaveDayData = data => { //TODO
-        console.log(data);
+    const handleSaveDayData = async data => { //TODO
+        const res = await saveDayPlan(selectedDay.dateString, data);
         setModalVisible(false);
     }
 

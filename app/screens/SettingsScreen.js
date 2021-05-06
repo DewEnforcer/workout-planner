@@ -5,20 +5,27 @@ import AppForm from '../components/forms/Form';
 import AppFormField from '../components/forms/FormField';
 import SubmitButton from '../components/forms/SubmitButton';
 import Screen from '../components/Screen';
+import { getSettings, saveSettings } from '../components/services/settingsService';
 import { resetWorkoutTypes } from '../components/services/workoutTypeService';
 
 import defaultStyles from "../config/styles";
 
 export default function SettingsScreen() {
 
-    const [weight, setWeight] = useState();
+    const [settings, setSettings] = useState();
+
+    const getSettingsData = async () => {
+        const settingsData = await getSettings();
+        setSettings(settingsData)
+    }
 
     useEffect(() => {
-        console.log("Getting weight from local storage");
-    })
+        getSettingsData();
+    }, [])
 
-    const handleSaveSettings = data => {
-        console.log("Saving settings", data);
+    const handleSaveSettings = async data => {
+        await saveSettings(data);
+        setSettings(data);
     }
 
     const handleResetWorkoutTypes = async => {
@@ -28,15 +35,17 @@ export default function SettingsScreen() {
     return (
         <Screen>
             <Text style={defaultStyles.headerText}>Settings</Text>
+            {settings && (
             <AppForm
                 initialValues={{
-                    weight: weight
+                    weight: settings.weight
                 }}
                 onSubmit={handleSaveSettings}
             >
                 <AppFormField name="weight" placeholder="Enter your weight..."/>
                 <SubmitButton title="Save"/>
             </AppForm>
+            )}
             <View>
                 <AppButton title="Reset workout types" onPress={handleResetWorkoutTypes}/>
             </View>

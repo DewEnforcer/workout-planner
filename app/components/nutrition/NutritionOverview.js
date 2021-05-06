@@ -8,7 +8,7 @@ export default function NutritionOverview({data, workoutType}) {
     const [totalGrams, setTotalGrams] = useState();
     const [requiredProtein, setRequiredProtein] = useState(null)
 
-    const handleProteinSetter = async () => {
+    const handleProteinSetter = async () => { //TODO
         let gramsTotal = data.reduce((total, currentVal) => {
             return total + currentVal.grams;
         }, 0)

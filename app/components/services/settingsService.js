@@ -18,13 +18,7 @@ export const getSettings = async () => {
 
 export const createDefaultSettings = () => {
     return {
-        weight: 87,
-        proteinConsumption: null,
-        protMultiplier: {
-            0: {title: "No workout", value: 1.6},
-            1: {title: "Standard workout", value: 2},
-            2: {title: "Extreme workout", value: 2.4}
-        }
+        weight: "87",
     }
 }
 // prot multiplier model -> key: {title: string, value: number} (no_workout: {title: "No workout", value: 1,6})
