@@ -13,12 +13,18 @@ import { addNutrition, getAllNutritions } from '../services/nutritionsService';
 import { useState } from 'react/cjs/react.development';
 import { addWorkout, getWorkouts } from '../services/workoutService';
 import { getAllNutritionPlans } from '../services/nutritionPlanService';
+import { getAllPlans } from '../services/dayService';
 
 
 export default function DaySetter({day, onSubmit}) {
 
     const [workouts, setWorkouts] = useState([]);
     const [nutritions, setNutritions] = useState([]);
+    const [selectedPlan, setSelectedPlan] = useState({
+        workout_tmp: null,
+        nutrition_tmp: null
+    });
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleNewNutrition = async data => {
         const newNutritions = await addNutrition(data);
@@ -30,6 +36,11 @@ export default function DaySetter({day, onSubmit}) {
         setWorkouts(newWorkouts);
     }
 
+    const getDayPlan = async () => {
+        const data = await getAllPlans();
+        if (data[day.dateString]) setSelectedPlan(data[day.dateString]);
+    }
+
     const getWorkoutsData = async () => {
         const workoutsData = await getWorkouts();
         if (workoutsData) setWorkouts(workoutsData);
@@ -39,27 +50,29 @@ export default function DaySetter({day, onSubmit}) {
         if (nutrData) setNutritions(nutrData);
     }
 
+    const getDataInitialiazer = async () => {
+        await getDayPlan();
+        await getWorkoutsData();
+        await getNutrition();
+
+        setIsLoading(false);
+    }
+
     useEffect(() => {
-        getWorkoutsData();
-        getNutrition();
+        getDataInitialiazer();
     }, [])
 
     return (
         <View>
             <Text style={defaultStyles.headerText}>{timeConverter(day.timestamp)}</Text>
-            <AppForm
-                initialValues={
-                    {
-                        workout_tmp: null,
-                        nutrition_tmp: null
-                    }
-                }
+            {!isLoading && <AppForm
+                initialValues={selectedPlan}
                 onSubmit={onSubmit}
             >
                 <TemplatePicker placeholder="Select your workout.." data={workouts} ModalChild={NewWorkout} modalChildOnSubmit={handleNewWorkout} numberOfColumns={1} name="workout_tmp"/>
                 <TemplatePicker placeholder="Select your nutritions.." data={nutritions} ModalChild={NewNutrition} modalChildOnSubmit={handleNewNutrition} numberOfColumns={1} name="nutrition_tmp"/>
                 <SubmitButton title="Save"/>
-            </AppForm>
+            </AppForm>}
         </View>
     );
 }

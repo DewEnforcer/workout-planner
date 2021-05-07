@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import DateDisplay from '../components/DateDisplay'
 import NutritionOverview from '../components/nutrition/NutritionOverview'
 import Screen from '../components/Screen'
+import { createCurrentDateKey, getAllPlans } from '../components/services/dayService'
 import WorkoutPreview from '../components/workout/WorkoutPreview'
 
 export default class DayOverview extends Component {
@@ -21,13 +22,24 @@ export default class DayOverview extends Component {
         ] 
     }
 
+    async componentDidMount() {
+        const dateKey = createCurrentDateKey();
+        const data = await getAllPlans();
+        const newState = {...this.state}
+        newState.workout = data[dateKey].workout_tmp;
+        newState.nutrition = data[dateKey].nutrition_tmp
+
+        this.setState(newState);
+        console.log(this.state.nutrition.nutritions);
+    }
+
     render() {
         return (
             <Screen>
                 <View style={styles.container}>
                     <DateDisplay/>
-                    <WorkoutPreview title={this.state.workout.title}/>
-                    <NutritionOverview workoutType={this.state.workout.typeId} data={this.state.nutrition}/>
+                    <WorkoutPreview title={this.state.workout.label}/>
+                    <NutritionOverview data={this.state.nutrition.nutritions} workoutType={this.state.workout.workout_typeId}/>
                 </View>
             </Screen>
         )

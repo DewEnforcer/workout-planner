@@ -11,8 +11,8 @@ export default function CalendarScreen() {
     const [selectedDay, setSelectedDay] = useState();
 
     const handleSetDay = day => {
-        setModalVisible(true);
         setSelectedDay(day);
+        setModalVisible(true);
     }
 
     const handleSaveDayData = async data => { //TODO

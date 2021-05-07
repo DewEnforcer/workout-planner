@@ -9,23 +9,24 @@ export default function NutritionOverview({data, workoutType}) {
     const [requiredProtein, setRequiredProtein] = useState(null)
 
     const handleProteinSetter = async () => { //TODO
+        if (!data) return;
         let gramsTotal = data.reduce((total, currentVal) => {
-            return total + currentVal.grams;
+            return total + parseInt(currentVal.grams);
         }, 0)
         const settings = await getSettings();
-        const {protMultiplier, weight} = settings;
-        setRequiredProtein(Math.round(weight * protMultiplier[workoutType].value))
+        const {weight} = settings;
+        setRequiredProtein(Math.round(weight * workoutType.value))
         setTotalGrams(gramsTotal);
     }
 
     useEffect(() => {
         handleProteinSetter();
-    }, [])
+    }, [data])
 
     return (
         <View style={styles.container}>
             <Text style={[styles.incomeText, totalGrams < requiredProtein ? styles.insufficientProtein : styles.sufficientProtein]}>Protein income: {totalGrams}{requiredProtein && `/${requiredProtein}`}g</Text>
-            {data.map(n => <NutritionDetails key={n.title} data={n}/>)}
+            {data && data.map(n => <NutritionDetails key={n.id} data={n}/>)}
         </View>
     );
 }
