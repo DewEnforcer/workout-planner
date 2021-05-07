@@ -1,15 +1,25 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableHighlight } from 'react-native';
 import AppButton from "../AppButton";
+import routes from '../navigators/routes';
+import WorkoutDetailsItems from './WorkoutDetailsItems';
 
-export default function WorkoutPreview({title}) {
+export default function WorkoutPreview({workout, dateKey}) {
+    const {label: title, excercises} = workout;
     const [optionsOpen, setOptionsOpen] = useState(false);
+
+    const {navigate} = useNavigation();
 
     const handleOpenWorkoutOptions = () => {
         setOptionsOpen(true);
     }
     const handleCloseWorkoutOptions = () => {
         setOptionsOpen(false);
+    }
+
+    const handleRedirectToCalendar = () => {
+        navigate(routes.CALENDAR, {dateString: dateKey, timestamp: Date.now()});
     }
 
     return (
@@ -21,8 +31,7 @@ export default function WorkoutPreview({title}) {
                 onRequestClose={handleCloseWorkoutOptions}
             >
                 <View style={styles.modalWrapper}>
-                    <AppButton style={styles.modalOptions} title="Set workout"/>
-                    <AppButton style={styles.modalOptions} title="Remove workout"/>
+                    <AppButton style={styles.modalOptions} title="Set workout" onPress={handleRedirectToCalendar}/>
                 </View>
             </Modal>
             <View style={styles.subContainer}>
@@ -30,6 +39,9 @@ export default function WorkoutPreview({title}) {
                 <AppButton onPress={handleOpenWorkoutOptions} color="black" style={styles.optionsBtn} icon="dots-vertical"/>
             </View>
             <Text style={[styles.subTitle, styles.text]}>{title}</Text>
+            <View style={styles.excContainer}>
+                {excercises.map(item => <WorkoutDetailsItems key={item.id} label={item.label}/>)}
+            </View>
         </View>
     );
 }
@@ -75,5 +87,9 @@ const styles = StyleSheet.create({
     subTitle: {
         fontSize: 22,
         fontWeight: "600"
+    },
+    excContainer: {
+        justifyContent: "center",
+        alignItems: "center",
     }
 });

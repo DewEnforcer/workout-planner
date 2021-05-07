@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Modal } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Screen from '../components/Screen';
 import { saveDayPlan } from '../components/services/dayService';
 import DaySetter from '../components/week/DaySetter';
 
-export default function CalendarScreen() {
+export default function CalendarScreen({route}) {
     
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedDay, setSelectedDay] = useState();
@@ -19,6 +19,17 @@ export default function CalendarScreen() {
         const res = await saveDayPlan(selectedDay.dateString, data);
         setModalVisible(false);
     }
+
+    const handleAutoOpen = () => {
+        if (route.params) {
+            setSelectedDay(route.params);
+            setModalVisible(true);
+        }
+    }
+
+    useEffect(() => {
+        handleAutoOpen()
+    }, [])
 
     return (
     <Screen>
