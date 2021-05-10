@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppForm from '../forms/Form';
 import AppFormField from '../forms/FormField';
 import SubmitButton from '../forms/SubmitButton';
-import AppTimePicker from '../forms/TimePicker';
 
 export default function NewNutrition({onSubmit}) {
     return (

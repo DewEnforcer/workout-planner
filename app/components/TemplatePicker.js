@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Modal } from "react-native";
 import { useFormikContext } from "formik";
 
 import Picker from "./Picker";
 import ErrorMessage from "./forms/ErrorMessage";
-import { Modal } from "react-native";
 
 function TemplatePicker({
   data,

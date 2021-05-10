@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { DeviceEventEmitter, Modal, StyleSheet, Text, View } from 'react-native';
+import { Modal, StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AppForm from '../forms/Form';
 import AppFormField from '../forms/FormField';
 import ItemInputList from '../forms/ItemInputList';
 import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
-import AppTimePicker from '../forms/TimePicker';
 import routes from '../navigators/routes';
 import { getAllNutritions } from '../services/nutritionsService';
 

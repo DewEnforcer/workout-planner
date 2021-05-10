@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Modal } from 'react-native';
+
 import AppButton from "../AppButton";
-import routes from '../navigators/routes';
 import WorkoutDetailsItems from './WorkoutDetailsItems';
+
+import routes from '../navigators/routes';
 
 export default function WorkoutPreview({workout, dateKey}) {
     const {label: title, excercises} = workout;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import {timeConverter} from "../utils/dateUtils";
 
 export default function DateDisplay({tmstp = null}) {

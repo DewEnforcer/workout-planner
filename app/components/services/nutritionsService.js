@@ -1,4 +1,3 @@
-import 'react-native-get-random-values';
 import {storeData, getData} from "./storeService";
 import shortid from "shortid"
 

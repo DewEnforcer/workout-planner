@@ -1,17 +1,18 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet} from 'react-native';
+
 import AppForm from '../forms/Form';
 import AppFormField from '../forms/FormField';
-import AppFormPicker from '../forms/FormPicker';
 import ItemInputList from '../forms/ItemInputList';
 import SimpleFormPicker from '../forms/SimpleFormPicker';
 import SubmitButton from '../forms/SubmitButton';
 import routes from '../navigators/routes';
-import { getExcercises } from '../services/excerciseService';
-import { addWorkoutType, getWorkoutTypes, saveWorkoutType } from '../services/workoutTypeService';
 import TemplatePicker from '../TemplatePicker';
 import NewWorkoutType from './NewWorkoutType';
+
+import { getExcercises } from '../services/excerciseService';
+import { addWorkoutType, getWorkoutTypes} from '../services/workoutTypeService';
 
 export default function NewWorkout({onSubmit}) {
 

@@ -5,15 +5,15 @@ import {
   TouchableWithoutFeedback,
   Modal,
   Button,
-  FlatList,
   Text
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 import ListEmptyComponent from "./lists/ListEmptyComponent";
+
+import defaultStyles from "../config/styles";
 
 function AppPicker({
   icon,

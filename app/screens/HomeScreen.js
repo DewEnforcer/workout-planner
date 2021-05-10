@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import NavButton from '../components/NavButton';
-import routes from '../components/navigators/routes';
 import Screen from '../components/Screen';
+
+import routes from '../components/navigators/routes';
 
 export default function HomeScreen({navigation}) {
     return (

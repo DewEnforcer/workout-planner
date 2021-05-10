@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import { timeConverter } from '../../utils/dateUtils';
+
 import AppForm from '../forms/Form';
-import AppFormPicker from '../forms/FormPicker';
-import PickerItem from '../PickerItem';
 import TemplatePicker from "../TemplatePicker";
-import defaultStyles from "../../config/styles";
 import SubmitButton from '../forms/SubmitButton';
 import NewWorkout from '../workout/NewWorkout';
 import NewNutrition from '../nutrition/NewNutrition';
@@ -14,6 +13,8 @@ import { useState } from 'react/cjs/react.development';
 import { addWorkout, getWorkouts } from '../services/workoutService';
 import { getAllNutritionPlans } from '../services/nutritionPlanService';
 import { getAllPlans } from '../services/dayService';
+
+import defaultStyles from "../../config/styles";
 
 
 export default function DaySetter({day, onSubmit}) {

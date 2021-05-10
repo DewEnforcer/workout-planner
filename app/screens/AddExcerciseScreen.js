@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import Screen from '../components/Screen';
-import { addExcercise } from '../components/services/excerciseService';
 import NewExcercise from '../components/workout/NewExcercise';
+
+import { addExcercise } from '../components/services/excerciseService';
 
 export default function AddExcerciseScreen({navigation, route}) {
     const handleNewExc = async (data) => {

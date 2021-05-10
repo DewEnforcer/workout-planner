@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import AppForm from '../forms/Form';
 import AppFormField from '../forms/FormField';
 import SubmitButton from '../forms/SubmitButton';

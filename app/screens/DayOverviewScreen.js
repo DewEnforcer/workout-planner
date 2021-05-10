@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
+
 import DateDisplay from '../components/DateDisplay'
 import NutritionOverview from '../components/nutrition/NutritionOverview'
 import Screen from '../components/Screen'
-import { createCurrentDateKey, getAllPlans } from '../components/services/dayService'
 import WorkoutPreview from '../components/workout/WorkoutPreview'
+
+import { createCurrentDateKey, getAllPlans } from '../components/services/dayService'
 
 export default class DayOverview extends Component {
     state = {

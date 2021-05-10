@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { StyleSheet, Modal } from 'react-native';
+import {Calendar} from 'react-native-calendars';
+
 import Screen from '../components/Screen';
-import { saveDayPlan } from '../components/services/dayService';
 import DaySetter from '../components/week/DaySetter';
+
+import { saveDayPlan } from '../components/services/dayService';
 
 export default function CalendarScreen({route}) {
     
