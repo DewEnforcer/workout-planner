@@ -28,7 +28,8 @@ export default function NewWorkout({onSubmit}) {
     }
 
     const handleGetWorkoutTypes = async () => {
-        const data = await getWorkoutTypes();
+        let data = await getWorkoutTypes();
+        if (!data) data = [];
         setWorkoutTypes([{id: 0, label: "+Add new"}, ...data]);
     }
 

@@ -22,7 +22,8 @@ export default function NutritionPlan({onSubmit}) {
     }, [])
     
     const getNutritionsData = async () => {
-        const data = await getAllNutritions();
+        let data = await getAllNutritions();
+        if (!data) data = [];
         setNutritions([{id: 0, label: "+Add new"}, ...data])
     }
 

@@ -5,6 +5,7 @@ import AppForm from '../components/forms/Form';
 import AppFormField from '../components/forms/FormField';
 import SubmitButton from '../components/forms/SubmitButton';
 import Screen from '../components/Screen';
+import { removeAllNutritions } from '../components/services/nutritionsService';
 import { getSettings, saveSettings } from '../components/services/settingsService';
 import { resetWorkoutTypes } from '../components/services/workoutTypeService';
 
@@ -28,8 +29,12 @@ export default function SettingsScreen() {
         setSettings(data);
     }
 
-    const handleResetWorkoutTypes = async => {
-        resetWorkoutTypes();
+    const handleResetWorkoutTypes = async () => {
+        await resetWorkoutTypes();
+    }
+
+    const handleRemoveNutr = async () => {
+        await removeAllNutritions();
     }
 
     return (
@@ -48,6 +53,7 @@ export default function SettingsScreen() {
             )}
             <View>
                 <AppButton title="Reset workout types" onPress={handleResetWorkoutTypes}/>
+                <AppButton title="Remove all nutritions" onPress={handleRemoveNutr}/>
             </View>
         </Screen>
     );

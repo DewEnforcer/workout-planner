@@ -17,3 +17,5 @@ export const addNutrition = async (data) => {
 export const getAllNutritions = () => getData(KEY);
 
 export const saveNutritions = data => storeData(data, KEY);
+
+export const removeAllNutritions = () => storeData([], KEY);
